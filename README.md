@@ -127,6 +127,29 @@ You can deploy this project using:
 - Twitter: [@faisalakb786](https://twitter.com/Faisalakb786)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/faisal-mumtaz-514a221a6/)
 
+👨‍💻 **Luis Zubia**
+
+<ul>
+  <li>
+    <a href="https://github.com/luigirazum">
+    <img align="center" width="18px" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Github_logo_svg.svg" alt="github logo" />
+    <b>@luigirazum</b>
+    </a>
+  </li>
+  <li>
+  <!-- TODO: Change X-Logo source file -->
+    <a href="https://twitter.com/LuigiRazum">
+    <img align="center" width="18px" src="https://ik.imagekit.io/dqd3uh1at/logos/x-new-logo.svg?updatedAt=1704962156902" alt="" />
+    <b>@LuigiRazum</b>
+    </a>
+  </li>
+  <li>
+    <a href="https://linkedin.com/in/luiszubia">
+    <img align="center" width="18px" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="linkedin logo" />
+    <b>/luiszubia</b>
+    </a>
+  </li>
+</ul>
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
