@@ -1,5 +1,8 @@
 # user_controller.rb
 class UsersController < ApplicationController
+
+  before_action :set_user, only: %i[show destroy]
+  before_action :authenticate_user!
   def login
     @user = User.new
   end
