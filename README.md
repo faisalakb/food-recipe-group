@@ -127,6 +127,7 @@ You can deploy this project using:
 - Twitter: [@faisalakb786](https://twitter.com/Faisalakb786)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/faisal-mumtaz-514a221a6/)
 
+ 👤 **Thierry Noumbuh**
 
 - GitHub: [@axcell-0](https://github.com/axcell-0)
 
