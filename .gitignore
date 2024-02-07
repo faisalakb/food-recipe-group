@@ -36,6 +36,7 @@
 
 # Ignore local settings
 ./config/database*
-config/database*
 /config/database*
-.ruby-version
+./.ruby-version
+config/data*
+node_modules
