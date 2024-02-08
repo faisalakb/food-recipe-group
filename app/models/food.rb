@@ -8,13 +8,5 @@ class Food < ApplicationRecord
   has_many :recipe_foods
   has_many :recipes, through: :recipe_foods
 
-  after_create :create_recipe_foods_entry
-
-  private
-
-  def create_recipe_foods_entry
-    Recipe.all.each do |recipe|
-      recipe.recipe_foods.create(food: self, quantity: 0)
-    end
-  end
+  accepts_nested_attributes_for :recipe_foods
 end

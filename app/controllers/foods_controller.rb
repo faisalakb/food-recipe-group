@@ -22,13 +22,18 @@ class FoodsController < ApplicationController
 
   def new
     @food = Food.new
+    @food.recipe_foods.build
   end
 
   def create
     @food = current_user.foods.new(food_params)
-    if params[:recipe_id].present? # Check if recipe_id is present in the params
-      @food.recipes << Recipe.find(params[:recipe_id]) # Associate the food with the specified recipe
+
+    # Associate food with recipe if recipe_id is present
+    if params[:food][:recipe_id].present?
+      recipe = Recipe.find(params[:food][:recipe_id])
+      @food.recipes << recipe
     end
+    
     if @food.save
       redirect_to foods_path, notice: 'Food was successfully created.'
     else
@@ -38,11 +43,7 @@ class FoodsController < ApplicationController
 
   def update
     @food = Food.find(params[:id])
-    @food.attributes = food_params
-    if params[:recipe_id].present? # Check if recipe_id is present in the params
-      @food.recipes << Recipe.find(params[:recipe_id]) # Associate the food with the specified recipe
-    end
-    if @food.save
+    if @food.update(food_params)
       redirect_to foods_path, notice: 'Food was successfully updated.'
     else
       render :edit
@@ -51,18 +52,17 @@ class FoodsController < ApplicationController
 
   def destroy
     @food = Food.find(params[:id])
-
-    # Delete associated recipe_foods records
+    # Delete associated records in the RecipeFood join table
     @food.recipe_foods.destroy_all
-
-    # Now, you can safely delete the food
+    # Now delete the food record
     @food.destroy
     redirect_to foods_path, notice: 'Food was successfully deleted.'
   end
+  
 
   private
 
   def food_params
-    params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
+    params.require(:food).permit(:name, :measurement_unit, :price, recipe_foods_attributes: [:quantity])
   end
 end

@@ -54,15 +54,20 @@ class RecipesController < ApplicationController
 
   def public_list
     @public_recipes = Recipe.includes(recipe_foods: :food).where(public: true).order(created_at: :desc)
-
     if @public_recipes.present?
       @total_food_items = @public_recipes.sum { |recipe| recipe.recipe_foods.sum(:quantity) } || 0
-      @total_price = @public_recipes.sum { |recipe| recipe.recipe_foods.sum { |rf| rf.quantity * rf.food.price } } || 0
+      puts 'total food items are', @total_food_items
+      @total_price = @public_recipes.sum do |recipe|
+        recipe.recipe_foods.sum { |rf| (rf.quantity || 0) * (rf.food&.price || 0) }
+      end || 0
+      puts 'total price is', @total_price
     else
+      puts 'i am in else statement'
       @total_food_items = 0
       @total_price = 0
     end
   end
+  
 
   private
 
