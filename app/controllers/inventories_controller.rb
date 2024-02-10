@@ -2,11 +2,11 @@ class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[edit update destroy]
 
   def index
-    @inventories = Inventory.all
+    @inventories = Inventory.includes(:inventory_foods).all
   end
 
   def show
-    @inventory = Inventory.find(params[:id])
+    @inventory = Inventory.includes(:inventory_foods).find(params[:id])
   end
 
   def new
