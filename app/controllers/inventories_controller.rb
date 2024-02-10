@@ -1,4 +1,4 @@
-class InventoriesController < ApplicationController
+  class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[edit update destroy]
 
   def index
