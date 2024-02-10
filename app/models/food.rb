@@ -13,7 +13,9 @@ class Food < ApplicationRecord
   private
 
   def create_recipe_foods_entry
-    Recipe.all.each do |recipe|
+    return unless recipes.present?
+
+    recipes.each do |recipe|
       recipe.recipe_foods.create(food: self, quantity: 0)
     end
   end
