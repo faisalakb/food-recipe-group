@@ -2,7 +2,7 @@ class InventoryFoodsController < ApplicationController
   before_action :set_inventory
 
   def index
-    @inventory_foods = @inventory.inventory_foods
+    @inventory_foods = @inventory.inventory_foods.includes(:food)
   end
 
   def new
@@ -12,6 +12,6 @@ class InventoryFoodsController < ApplicationController
   private
 
   def set_inventory
-    @inventory = Inventory.find(params[:inventory_id])
+    @inventory = Inventory.includes(:inventory_foods).find(params[:inventory_id])
   end
 end

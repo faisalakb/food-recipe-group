@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
 
   def destroy
     @recipe = Recipe.find(params[:id])
-    @recipe.recipe_foods.destroy_all # Manually delete associated recipe_foods
+    @recipe.recipe_foods.destroy_all
     authorize! :destroy, @recipe
     @recipe.destroy
     redirect_to recipes_path, notice: 'Recipe was successfully deleted.'
