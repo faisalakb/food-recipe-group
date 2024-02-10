@@ -3,7 +3,7 @@ class RecipeFoodsController < ApplicationController
   before_action :check_permissions, only: :create
 
   def index
-    @foods = Food.all.includes(:recipes)
+    @foods = Food.all
   end
 
   def create
@@ -14,15 +14,15 @@ class RecipeFoodsController < ApplicationController
       redirect_to @recipe
     else
       flash[:error] = 'Error adding food to recipe.'
-      render 'new'
+      render 'new' # Assuming you have a 'new' view for the form
     end
   end
 
   private
 
   def find_recipe_and_food
-    @recipe = Recipe.includes(:user).find(params[:recipe_id])
-    @food = Food.includes(:user).find(params[:recipe_food][:food_id])
+    @recipe = Recipe.find(params[:recipe_id])
+    @food = Food.find(params[:recipe_food][:food_id]) # Update this line
   end
 
   def check_permissions

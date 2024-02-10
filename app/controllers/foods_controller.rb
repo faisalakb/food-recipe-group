@@ -7,7 +7,7 @@ class FoodsController < ApplicationController
       missing_foods
       render :missing_foods
     else
-      @foods = Food.all.includes(:recipes, :inventory_foods)
+      @foods = Food.all
     end
   end
 
@@ -16,7 +16,7 @@ class FoodsController < ApplicationController
       missing_foods
       render :missing_foods
     else
-      @food = Food.includes(:recipes, :inventory_foods).find(params[:id])
+      @food = Food.find(params[:id])
     end
   end
 
@@ -33,6 +33,7 @@ class FoodsController < ApplicationController
     missing_foods_from_inventory = current_user.foods.where.not(id: food_ids_from_inventory)
     @missing_foods_from_recipes = missing_foods_from_recipes || []
     @missing_foods_from_inventory = missing_foods_from_inventory || []
+
     @missing_foods = @missing_foods_from_recipes + @missing_foods_from_inventory
     @total_items = @missing_foods.count
     @total_price = @missing_foods.sum(&:price)
@@ -47,11 +48,13 @@ class FoodsController < ApplicationController
 
   def create
     @food = current_user.foods.new(food_params)
+
     if @food.save
       if params[:food][:recipe_id].present?
         recipe = Recipe.find(params[:food][:recipe_id])
         recipe.recipe_foods.create(food: @food, quantity: @food.quantity)
       end
+
       redirect_to foods_path, notice: 'Food was successfully created.'
     else
       render :new
@@ -60,8 +63,13 @@ class FoodsController < ApplicationController
 
   def destroy
     @food = Food.find(params[:id])
+
+    # Find and destroy associated recipe_foods records
     RecipeFood.where(food_id: @food.id).destroy_all
+
+    # Delete the food record
     @food.destroy
+
     redirect_to foods_path, notice: 'Food was successfully deleted.'
   end
 
@@ -69,5 +77,27 @@ class FoodsController < ApplicationController
 
   def food_params
     params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
+  end
+
+  def load_food
+    @food = Food.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to foods_path, alert: 'Food not found.'
+  end
+
+  def calculate_missing_foods
+    recipes_with_foods = current_user.recipes.includes(:foods)
+    food_ids_from_recipes = recipes_with_foods.flat_map { |recipe| recipe.foods.pluck(:id) }
+    inventory_foods = current_user.inventories.flat_map { |inventory| inventory.inventory_foods.includes(:food) }
+    food_ids_from_inventory = inventory_foods.flat_map { |inv_food| inv_food.food.id }
+    missing_foods_from_recipes = current_user.foods.where.not(id: food_ids_from_recipes)
+    missing_foods_from_inventory = current_user.foods.where.not(id: food_ids_from_inventory)
+
+    @missing_foods_from_recipes = missing_foods_from_recipes || []
+    @missing_foods_from_inventory = missing_foods_from_inventory || []
+
+    @missing_foods = @missing_foods_from_recipes + @missing_foods_from_inventory
+    @total_items = @missing_foods.count
+    @total_price = @missing_foods.sum(&:price)
   end
 end
