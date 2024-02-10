@@ -29,10 +29,11 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.includes(:foods).find(params[:id])
+    @recipe = Recipe.includes(foods: :inventories).find(params[:id])
     @foods = @recipe.foods
-    @inventories = Inventory.all
+    @inventories = Inventory.all # This line might cause N+1 query issue
   end
+  
 
   def associate_inventory
     @recipe = Recipe.find(params[:id])
