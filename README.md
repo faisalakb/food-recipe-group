@@ -128,7 +128,36 @@ You can deploy this project using:
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/faisal-mumtaz-514a221a6/)
 
 
+👤 **Axcell Evans**
+
 - GitHub: [@axcell-0](https://github.com/axcell-0)
+- Twitter: [@noumbuh](https://twitter.com/https://twitter.com/noumbuh)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/https://www.linkedin.com/in/thierry-noumbuh-a44173257/)
+
+
+👨‍💻 **Luis Zubia**
+
+<ul>
+  <li>
+    <a href="https://github.com/luigirazum">
+    <img align="center" width="18px" src="https://upload.wikimedia.org/wikipedia/commons/2/24/Github_logo_svg.svg" alt="github logo" />
+    <b>@luigirazum</b>
+    </a>
+  </li>
+  <li>
+  <!-- TODO: Change X-Logo source file -->
+    <a href="https://twitter.com/LuigiRazum">
+    <img align="center" width="18px" src="https://ik.imagekit.io/dqd3uh1at/logos/x-new-logo.svg?updatedAt=1704962156902" alt="x logo" />
+    <b>@LuigiRazum</b>
+    </a>
+  </li>
+  <li>
+    <a href="https://linkedin.com/in/luiszubia">
+    <img align="center" width="18px" src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png" alt="linkedin logo" />
+    <b>/luiszubia</b>
+    </a>
+  </li>
+</ul>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
