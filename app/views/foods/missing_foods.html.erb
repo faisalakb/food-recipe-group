@@ -1,0 +1,10 @@
+<h1>Missing Foods List</h1>
+
+<ul>
+  <% @missing_foods.each do |food| %>
+    <li><%= food.name %></li>
+  <% end %>
+</ul>
+
+<p>Total Items: <%= @total_items %></p>
+<p>Total Price: <%= @total_price %></p>

@@ -7,20 +7,9 @@ Rails.application.routes.draw do
 
   resources :recipe_foods, only: [:index, :create]
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  
-  root to: 'foods#index'
-  get '/missing_foods', to: 'foods#missing_foods'
-  get '/foods', to: 'foods#index', as: 'foods'
-
-  get '/foods/:id', to: 'foods#show', as: 'food'
-  get '/generalshoppinglist', to: 'generalshoppinglist#index'
-  get '/public_recipes', to: 'recipes#public_list', as: 'public_recipes'
-  get '/GeneralShoppingList', to: 'general_shopping_list#index', as: 'general_shopping_list'
+  resources :inventories do
+    resources :inventory_foods, only: [:index, :new, :create, :show, :update, :destroy]
+  end  
 
   resources :foods, except: [:index] do
     collection do
@@ -28,7 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :inventories do
-    resources :inventory_foods, only: [:index, :new, :create, :show, :update, :destroy]
-  end  
+  get '/missing_foods', to: 'foods#missing_foods'
+  get '/public_recipes', to: 'recipes#public_list', as: 'public_recipes'
+  get 'foods/shopping_list', to: 'foods#shopping_list'
+  # Defines the root path route ("/")
+  root to: 'foods#index'
+
+  get "up" => "rails/health#show", as: :rails_health_check
 end
