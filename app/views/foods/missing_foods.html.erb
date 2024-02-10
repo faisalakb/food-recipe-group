@@ -1,10 +1,14 @@
-<h1>Missing Foods List</h1>
+<!-- foods/missing_foods.html.erb -->
 
-<ul>
-  <% @missing_foods.each do |food| %>
-    <li><%= food.name %></li>
-  <% end %>
-</ul>
+<div class="container">
+  <h1>Missing Foods List</h1>
 
-<p>Total Items: <%= @total_items %></p>
-<p>Total Price: <%= @total_price %></p>
+  <ul>
+    <% @missing_foods.each do |food| %>
+      <li><%= food.name %></li>
+    <% end %>
+  </ul>
+
+  <p>Total Items: <%= @total_items %></p>
+  <p>Total Price: <%= number_to_currency(@total_price) %></p>
+</div>

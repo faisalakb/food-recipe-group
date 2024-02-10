@@ -10,6 +10,9 @@ class User < ApplicationRecord
   has_many :recipes, dependent: :destroy
   has_many :inventories, foreign_key: 'users_id'
 
+  # Add an admin attribute
+  attribute :admin, :boolean, default: false
+
   def missing_foods
     recipes_with_foods = recipes.includes(:foods)
     food_ids_from_recipes = recipes_with_foods.flat_map { |recipe| recipe.foods.pluck(:id) }

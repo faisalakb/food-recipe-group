@@ -46,9 +46,9 @@ gem 'bootsnap', require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem 'capybara'
   gem 'debug', platforms: %i[mri windows]
   gem 'letter_opener'
-  gem 'capybara'
   gem 'rspec-rails'
 end
 
@@ -65,10 +65,12 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem 'selenium-webdriver'
   gem 'factory_bot_rails'
+  gem 'rails-controller-testing'
+  gem 'selenium-webdriver'
 end
 
 gem 'cancancan', '~> 3.1'
 gem 'devise', '~> 4.9'
+gem 'faker'
 gem 'rubocop', '>= 1.0', '< 2.0'

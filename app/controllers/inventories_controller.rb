@@ -1,5 +1,6 @@
 class InventoriesController < ApplicationController
   before_action :set_inventory, only: %i[edit update destroy]
+  before_action :validate_user, only: %i[edit update destroy]
 
   def index
     @inventories = Inventory.includes(:inventory_foods).all
@@ -17,7 +18,7 @@ class InventoriesController < ApplicationController
     @inventory = Inventory.new(inventory_params)
     @inventory.user = current_user
     if @inventory.save
-      redirect_to inventories_path(current_user), notice: 'Inventory was successfully created.'
+      redirect_to inventories_path, notice: 'Inventory was successfully created.'
     else
       render :new
     end
@@ -41,9 +42,9 @@ class InventoriesController < ApplicationController
   private
 
   def validate_user
-    return if @inventory && (current_user.id == @inventory.users_id || current_user.admin?)
+    return if @inventory && (current_user == @inventory.user || current_user.admin?)
 
-    flash[:alert] = 'You do not have permission to delete this item.'
+    flash[:alert] = 'You do not have permission to edit this item.'
     redirect_back fallback_location: root_path
   end
 
@@ -52,6 +53,6 @@ class InventoriesController < ApplicationController
   end
 
   def inventory_params
-    params.require(:inventory).permit(:name, :description, :users_id)
+    params.require(:inventory).permit(:name, :description, :user_id)
   end
 end

@@ -76,7 +76,7 @@
 > 
 ```sh
 cd Recipe_App
-https://github.com/faisalakb/Recipe_App.git
+https://github.com/faisalakb/food-recipe-group.git
 ```
 
 <!-- SETUP -->

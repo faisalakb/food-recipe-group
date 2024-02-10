@@ -44,6 +44,7 @@ class FoodsController < ApplicationController
     @total_items = @missing_foods.count
     @total_price = @missing_foods.sum(&:price)
   end
+
   def create
     @food = current_user.foods.new(food_params)
     if @food.save
@@ -56,13 +57,16 @@ class FoodsController < ApplicationController
       render :new
     end
   end
+
   def destroy
     @food = Food.find(params[:id])
     RecipeFood.where(food_id: @food.id).destroy_all
     @food.destroy
     redirect_to foods_path, notice: 'Food was successfully deleted.'
   end
+
   private
+
   def food_params
     params.require(:food).permit(:name, :measurement_unit, :price, :quantity)
   end
