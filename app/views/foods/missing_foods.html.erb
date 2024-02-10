@@ -1,14 +1,35 @@
-<!-- foods/missing_foods.html.erb -->
+<div class="mf-container">
+    <h1>Shopping List</h1>
 
-<div class="container">
-  <h1>Missing Foods List</h1>
+    <div class="mf-head-values">
+        <div class="left">
+            <p>Amount of food items to buy: <%= @total_items %></p>
+            <p>Total value of food needed: <%= number_to_currency(@total_price) %></p>
+        </div>
 
-  <ul>
-    <% @missing_foods.each do |food| %>
-      <li><%= food.name %></li>
-    <% end %>
-  </ul>
+        <div class="right">
+            <p>Recipe: <%= @missing_foods_from_recipes.first&.name %></p>
+            <p>Inventory: <%= @missing_foods_from_inventory.first&.name %> </p>
+        </div>
+    </div>
 
-  <p>Total Items: <%= @total_items %></p>
-  <p>Total Price: <%= number_to_currency(@total_price) %></p>
+    <table class="mf-table">
+        <thead>
+            <tr>
+                <th class="sortable asc desc">Name</th>
+                <th>Quantity</th>
+                <th class="sortable asc desc">Price</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% @missing_foods.each do |food| %>
+            <tr>
+                <td><%= food.name %></td>
+                <td><%= food.quantity %></td>
+                <td><%= number_to_currency(food.price) %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>
