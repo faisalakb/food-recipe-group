@@ -24,6 +24,7 @@ class InventoriesController < ApplicationController
   end
 
   def edit
+    #  logic for edit
   end
 
   def update
