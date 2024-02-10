@@ -1,4 +1,4 @@
-class InventoryFoodsController < ApplicationController
+inventory_food_controller.rb : class InventoryFoodsController < ApplicationController
   before_action :set_inventory
 
   def index
