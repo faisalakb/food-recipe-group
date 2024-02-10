@@ -13,10 +13,13 @@
       <%= form.label :name %>
       <%= form.text_field :name, class: "form-control", required: true %>
     </div>
+    <!-- Remove the following lines related to description -->
+    <!--
     <div>
       <%= form.label :description %>
       <%= form.text_field :description, class: "form-control" %>
     </div>
+    -->
 
     <%= form.submit "Create", data: { turbo: false }, class: "btn btn-primary" %>
   <% end %>
