@@ -23,9 +23,6 @@ class InventoriesController < ApplicationController
     end
   end
 
-  def edit
-    #  logic for edit
-  end
 
   def update
     if @inventory.update(inventory_params)
